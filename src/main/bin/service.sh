@@ -1,5 +1,5 @@
 #!/bin/bash
-APP_NAME=longquanapi.jar
+APP_NAME=mygateway.jar
 JVM="-Xmx2688M -Xms2688M -Xmn960M -XX:MaxMetaspaceSize=512M -XX:MetaspaceSize=512M -XX:+UseConcMarkSweepGC -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=70 -XX:+ExplicitGCInvokesConcurrentAndUnloadsClasses -XX:+CMSClassUnloadingEnabled -XX:+ParallelRefProcEnabled -XX:+CMSScavengeBeforeRemark -XX:ErrorFile=/data/logs/hs_err_pid%p.log  -XX:HeapDumpPath=/data/logs -XX:+HeapDumpOnOutOfMemoryError"
 
 #JAVA_HOME=/data/jdk1.8.0_73

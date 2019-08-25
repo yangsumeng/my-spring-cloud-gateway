@@ -1,16 +1,6 @@
-project:
-  name: longquan-api
-  application: longquanapi
-  chineseName: longquanAPI后台服务
-  version: LONGQUAN_API_V1.0.0
-  unpackTime: 2019/8/01
-  PIC:
-  versionControlNo:
-  versionControlPath: ssh://git@192.168.1.10:50022/longquan/longquan-api-manage.git
-  framework: springboot
 server:
   servlet:
-    context-path: /longquanapi
+    context-path: /mygateway
   port: 7766
   tomcat:
     basedir: /tomcat
@@ -29,7 +19,7 @@ server:
 #  tomcat.maxHttpPostSize: -1
 spring:
   application:
-    name: longquanapi
+    name: mygateway
   cloud:
     gateway:
       globalcors:
