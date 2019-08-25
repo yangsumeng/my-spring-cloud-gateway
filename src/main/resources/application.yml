@@ -1,0 +1,72 @@
+project:
+  name: longquan-api
+  application: longquanapi
+  chineseName: longquanAPI后台服务
+  version: LONGQUAN_API_V1.0.0
+  unpackTime: 2019/8/01
+  PIC:
+  versionControlNo:
+  versionControlPath: ssh://git@192.168.1.10:50022/longquan/longquan-api-manage.git
+  framework: springboot
+server:
+  servlet:
+    context-path: /longquanapi
+  port: 7766
+  tomcat:
+    basedir: /tomcat
+    accesslog:
+      enabled: true
+      buffered: true
+      directory: ./logs
+      file-date-format: _yyyy-MM-dd
+      pattern: '%h %t "%r" %s %b %D %I "%{X-Forwarded-For}i" "%{User-Agent}i" "%{Referer}i" "%{X-Real-IP}i"'
+      prefix: ${project.name}_accesslog
+      rename-on-rotate: false
+      request-attributes-enabled: false
+      rotate: true
+      suffix: .log
+#  tomcat.uri-encoding: UTF-8
+#  tomcat.maxHttpPostSize: -1
+spring:
+  application:
+    name: longquanapi
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+      discovery:
+        locator:
+          enabled: false
+      routes:
+      - id: firstroute
+        uri: http://localhost:${server.port}    # 此处配置并没用  内部重定向  http://localhost:${server.port}/api
+        order: 10000          #优先级最低
+        predicates:           #增加初次过滤规则
+        - Path=/api/{segment}/**
+        filters:
+        #- StripPrefix=2
+        #- PrefixPath=/api/
+        #- SetPath=/api/{segment}
+        - AddRequestHeader=first-request, true
+#  jackson:
+#    time-zone: GMT+8
+#    date-format: yyyy-MM-dd HH:mm:ss
+#    default-property-inclusion: non_null
+#  http:
+#    encoding:
+#      charset: UTF-8
+#      force: true
+#开启actuator管理api，后面要关闭
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+ignored:
+  urls:
